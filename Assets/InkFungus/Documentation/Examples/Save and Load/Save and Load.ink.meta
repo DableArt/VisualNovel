@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 780706ec3356cfb4d9ca5e82bf753a9c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Documentation/Examples/Save and Load/Save and Load.ink
+  uploadId: 818826

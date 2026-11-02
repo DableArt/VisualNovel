@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d18ca690ddb259e4d98c49ae52cfec57
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Documentation/Examples/Fading Views/Fading Views.json
+  uploadId: 818826

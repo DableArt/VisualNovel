@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6863f37f0bd753a47a685373932c4615
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Scripts/Commands/JumpTo.cs
+  uploadId: 818826

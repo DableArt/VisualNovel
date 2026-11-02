@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dd709e660809b6f4f98f75d490b7b618
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Resources/Prefabs/Variable Processor.prefab
+  uploadId: 818826

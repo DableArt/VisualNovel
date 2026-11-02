@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d5589ca0e58e25c4cb0dd64d4a7512e9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Scripts/NarrativeDirector.cs
+  uploadId: 818826

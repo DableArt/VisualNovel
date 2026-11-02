@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a47407694b2f363459f487c257f949d1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Documentation/Examples/Fading Views/Fading ViewsSettings.lighting
+  uploadId: 818826

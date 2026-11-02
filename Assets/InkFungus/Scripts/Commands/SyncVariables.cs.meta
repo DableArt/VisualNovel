@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 75be0d6fbd6aa8040a75cdefd3dcf013
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Scripts/Commands/SyncVariables.cs
+  uploadId: 818826

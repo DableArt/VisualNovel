@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fee0cb523e0428d4da139e9356a257f1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Scripts/Commands/SaveSnapshot.cs
+  uploadId: 818826

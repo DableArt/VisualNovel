@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c3328f7d7226c494193ed6186b3dd2d7
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Documentation/Localization/Interactive Documentation (it).json
+  uploadId: 818826

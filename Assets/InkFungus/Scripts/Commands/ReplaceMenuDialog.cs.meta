@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 27cb9d32fc69a7046a05c196281c4286
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 168147
+  packageName: Ink-Fungus Gateway
+  packageVersion: 1.2.1
+  assetPath: Assets/InkFungus/Scripts/Commands/ReplaceMenuDialog.cs
+  uploadId: 818826
