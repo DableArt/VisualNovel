@@ -38,6 +38,10 @@ namespace VisualNovel.Training
             rect = (RectTransform)transform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
             rect.sizeDelta = noteSize;
+
+            // Спрайт рисуется один раз целиком, а не замощённой плиткой.
+            arrowImage.type = Image.Type.Simple;
+            arrowImage.preserveAspect = true;
         }
 
         public void Init(TrainingNote note, Vector2 spawnPosition, Vector2 hitPosition,

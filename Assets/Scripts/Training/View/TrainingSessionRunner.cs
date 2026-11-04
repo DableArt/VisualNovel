@@ -85,10 +85,15 @@ namespace VisualNovel.Training
         private void OnNoteVisible(int index, TrainingNote note)
         {
             var view = Instantiate(notePrefab, notesContainer);
-            view.Init(note, spawnPoint.anchoredPosition, hitZone.anchoredPosition,
+            view.Init(note, LocalPoint(spawnPoint), LocalPoint(hitZone),
                 config.noteTravelTime, session.Elapsed);
             activeNotes.Add(view);
         }
+
+        // Переводит позицию точки в координаты контейнера нот —
+        // работает корректно при любых якорях у SpawnPoint/HitZone.
+        private Vector2 LocalPoint(RectTransform point) =>
+            notesContainer.InverseTransformPoint(point.position);
 
         private void OnNoteHit(int index, TrainingNote note, TrainingHitResult result, int points)
         {
