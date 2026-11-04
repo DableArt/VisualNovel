@@ -6,9 +6,15 @@ namespace VisualNovel.Training
     /// <summary>
     /// Визуал одной стрелки-ноты: летит к зоне удара и исчезает.
     /// Спрайты стрелок назначаются в инспекторе (4 направления).
+    /// Якоря и размер настраиваются кодом — префаб достаточно создать как UI → Image.
     /// </summary>
+    [RequireComponent(typeof(Image))]
     public sealed class TrainingNoteView : MonoBehaviour
     {
+        [Header("Размер стрелки (пиксели)")]
+        [SerializeField] private Vector2 noteSize = new(80f, 80f);
+
+        [Header("Спрайты направлений")]
         [SerializeField] private Image arrowImage;
         [SerializeField] private Sprite leftSprite;
         [SerializeField] private Sprite downSprite;
@@ -26,6 +32,12 @@ namespace VisualNovel.Training
             // Поле можно не заполнять в инспекторе — берём Image со своего объекта.
             if (arrowImage == null)
                 arrowImage = GetComponent<Image>();
+
+            // Принудительно точечные якоря + фиксированный размер:
+            // иначе растянутые якоря превращают стрелку в полосу на весь экран.
+            rect = (RectTransform)transform;
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.sizeDelta = noteSize;
         }
 
         public void Init(TrainingNote note, Vector2 spawnPosition, Vector2 hitPosition,
@@ -39,15 +51,12 @@ namespace VisualNovel.Training
             rect = (RectTransform)transform;
             rect.anchoredPosition = spawnPosition;
 
-            if (arrowImage != null)
-            {
-                arrowImage.sprite = SpriteFor(note.Key);
-                arrowImage.enabled = true;
-            }
-            else
-            {
-                Debug.LogWarning("[Training] На префабе ноты нет Image — стрелка будет невидимой.", this);
-            }
+            var sprite = SpriteFor(note.Key);
+            if (sprite == null)
+                Debug.LogWarning($"[Training] Не назначен спрайт для направления {note.Key} — стрелка будет белым квадратом.", this);
+
+            arrowImage.sprite = sprite;
+            arrowImage.enabled = true;
         }
 
         /// <summary>Позиционирует ноту по времени сессии. Возвращает false, если ноту пора удалить.</summary>
