@@ -21,6 +21,13 @@ namespace VisualNovel.Training
         private float travelTime;
         private float spawnTime;
 
+        private void Awake()
+        {
+            // Поле можно не заполнять в инспекторе — берём Image со своего объекта.
+            if (arrowImage == null)
+                arrowImage = GetComponent<Image>();
+        }
+
         public void Init(TrainingNote note, Vector2 spawnPosition, Vector2 hitPosition,
             float travelTime, float spawnTime)
         {
