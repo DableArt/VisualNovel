@@ -38,8 +38,16 @@ namespace VisualNovel.Training
 
             rect = (RectTransform)transform;
             rect.anchoredPosition = spawnPosition;
-            arrowImage.sprite = SpriteFor(note.Key);
-            arrowImage.enabled = true;
+
+            if (arrowImage != null)
+            {
+                arrowImage.sprite = SpriteFor(note.Key);
+                arrowImage.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("[Training] На префабе ноты нет Image — стрелка будет невидимой.", this);
+            }
         }
 
         /// <summary>Позиционирует ноту по времени сессии. Возвращает false, если ноту пора удалить.</summary>
