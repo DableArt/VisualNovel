@@ -39,14 +39,16 @@ namespace VisualNovel.Training
         public void ShowHit(string phrase)
         {
             ShowPhrase(phrase);
-            characterAnimator?.SetTrigger(successTrigger);
+            if (characterAnimator != null)
+                characterAnimator.SetTrigger(successTrigger);
             PlayClip(hitClip);
         }
 
         public void ShowMiss(string phrase)
         {
             ShowPhrase(phrase);
-            characterAnimator?.SetTrigger(missTrigger);
+            if (characterAnimator != null)
+                characterAnimator.SetTrigger(missTrigger);
             PlayClip(missClip);
         }
 
