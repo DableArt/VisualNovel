@@ -29,7 +29,8 @@ namespace VisualNovel.Training
         };
 
         private TrainingSession session;
-        private readonly List<TrainingNoteView> activeNotes = new();
+        private readonly Dictionary<int, TrainingNoteView> activeNotes = new();
+        private readonly List<int> expiredNoteIndices = new();
 
         private void Start()
         {
@@ -88,24 +89,24 @@ namespace VisualNovel.Training
 
         private void UpdateNoteViews()
         {
-            for (int i = activeNotes.Count - 1; i >= 0; i--)
+            expiredNoteIndices.Clear();
+            foreach (var pair in activeNotes)
             {
-                if (activeNotes[i] == null ||
-                    !activeNotes[i].UpdatePosition(session.Elapsed))
-                {
-                    if (activeNotes[i] != null)
-                        Destroy(activeNotes[i].gameObject);
-                    activeNotes.RemoveAt(i);
-                }
+                if (pair.Value == null || !pair.Value.UpdatePosition(session.Elapsed))
+                    expiredNoteIndices.Add(pair.Key);
             }
+
+            foreach (int index in expiredNoteIndices)
+                RemoveNoteView(index);
         }
 
         private void OnNoteVisible(int index, TrainingNote note)
         {
+            RemoveNoteView(index);
             var view = Instantiate(notePrefab, notesContainer);
             view.Init(note, LocalPoint(spawnPoint), LocalPoint(hitZone),
                 config.noteTravelTime, session.Elapsed);
-            activeNotes.Add(view);
+            activeNotes.Add(index, view);
         }
 
         // Переводит позицию точки в координаты контейнера нот —
@@ -115,20 +116,44 @@ namespace VisualNovel.Training
 
         private void OnNoteHit(int index, TrainingNote note, TrainingHitResult result, int points)
         {
+            RemoveNoteView(index);
             heroStats?.Add(config.stat, points);
             feedback?.ShowHit(PickRandom(config.successPhrases));
         }
 
         private void OnNoteMissed(int index, TrainingNote note)
         {
+            RemoveNoteView(index);
             feedback?.ShowMiss(PickRandom(config.missPhrases));
         }
 
         private void OnSessionFinished(bool completed)
         {
+            ClearNoteViews();
             feedback?.ShowPhrase(completed
                 ? $"Тренировка завершена! +{session.EarnedStatPoints} к {StatName(config.stat)}"
                 : "Тренировка провалена. Попробуй ещё раз!");
+        }
+
+        private void RemoveNoteView(int index)
+        {
+            if (!activeNotes.TryGetValue(index, out var view))
+                return;
+
+            activeNotes.Remove(index);
+            if (view != null)
+                Destroy(view.gameObject);
+        }
+
+        private void ClearNoteViews()
+        {
+            foreach (var view in activeNotes.Values)
+            {
+                if (view != null)
+                    Destroy(view.gameObject);
+            }
+
+            activeNotes.Clear();
         }
 
         private static string PickRandom(string[] phrases) =>

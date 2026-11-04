@@ -45,7 +45,10 @@ Assets/Scripts/Training/
    - `PhraseText` — TextMeshPro текст по центру («Так держать!»).
    - Объект персонажа с `Animator` (контроллер ниже).
    - `AudioSource` для звуков.
-   - На объект `TrainingFeedbackView` привяжи текст, аниматор и звуки.
+   - Добавь `TrainingFeedbackView` на объект Feedback и назначь ему
+     `PhraseText` (TMP_Text); если поле пустое, он ищет TMP_Text среди своих
+     дочерних объектов. Фразы берутся из `Success Phrases` и `Miss Phrases`
+     назначенного `TrainingSessionConfig`.
    - Префаб `NoteView` должен быть отдельным объектом `UI → Image` с
      компонентом `TrainingNoteView` и четырьмя спрайтами стрелок. Не создавай
      его перетаскиванием всего Canvas в Project. Цвет Image оставь белым и

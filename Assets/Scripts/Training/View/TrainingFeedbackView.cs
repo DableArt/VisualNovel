@@ -27,6 +27,15 @@ namespace VisualNovel.Training
 
         private Coroutine phraseRoutine;
 
+        private void Awake()
+        {
+            if (phraseText == null)
+                phraseText = GetComponentInChildren<TMP_Text>(true);
+
+            if (phraseText != null)
+                phraseText.enabled = false;
+        }
+
         public void ShowHit(string phrase)
         {
             ShowPhrase(phrase);
@@ -43,7 +52,11 @@ namespace VisualNovel.Training
 
         public void ShowPhrase(string phrase)
         {
-            if (phraseText == null) return;
+            if (phraseText == null)
+            {
+                Debug.LogWarning("[Training] В TrainingFeedbackView не назначен Phrase Text (TextMeshPro).", this);
+                return;
+            }
 
             if (phraseRoutine != null) StopCoroutine(phraseRoutine);
             phraseRoutine = StartCoroutine(ShowPhraseRoutine(phrase));
@@ -55,6 +68,7 @@ namespace VisualNovel.Training
             phraseText.enabled = true;
             yield return new WaitForSeconds(phraseShowTime);
             phraseText.enabled = false;
+            phraseRoutine = null;
         }
 
         private void PlayClip(AudioClip clip)
