@@ -1,10 +1,10 @@
 ﻿<Solution>
   <Project Path="Fungus.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Ink-Libraries.csproj" />
   <Project Path="FungusEditor.csproj" />
   <Project Path="FungusExamples.csproj" />
   <Project Path="InkEditor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Fungus.FungusLuaEditor.csproj" />
   <Project Path="Fungus.FungusLuaJSONCheckerEditor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
