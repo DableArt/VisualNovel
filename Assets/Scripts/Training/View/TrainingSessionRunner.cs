@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace VisualNovel.Training
 {
@@ -39,6 +40,23 @@ namespace VisualNovel.Training
         public void StartTraining(TrainingSessionConfig sessionConfig)
         {
             config = sessionConfig;
+
+            if (config == null || notePrefab == null || notesContainer == null ||
+                spawnPoint == null || hitZone == null)
+            {
+                Debug.LogError("[Training] Заполни Config, Note Prefab, Notes Container, Spawn Point и Hit Zone.", this);
+                enabled = false;
+                return;
+            }
+
+            if (notePrefab.GetComponent<Image>() == null || notePrefab.GetComponent<Canvas>() != null)
+            {
+                Debug.LogError("[Training] Note Prefab должен быть отдельным объектом UI → Image " +
+                    "с TrainingNoteView, а не Canvas или целой сценой. Создай новый prefab для одной стрелки.", notePrefab);
+                enabled = false;
+                return;
+            }
+
             session = new TrainingSession(config, new RandomTrainingSequenceGenerator());
             session.NoteBecameVisible += OnNoteVisible;
             session.NoteHit += OnNoteHit;

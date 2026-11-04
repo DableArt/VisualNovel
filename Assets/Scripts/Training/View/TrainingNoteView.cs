@@ -59,6 +59,8 @@ namespace VisualNovel.Training
             if (sprite == null)
                 Debug.LogWarning($"[Training] Не назначен спрайт для направления {note.Key} — стрелка будет белым квадратом.", this);
 
+            // Цвет Image — только белый tint; прозрачность фона должна быть в самом PNG.
+            arrowImage.color = Color.white;
             arrowImage.sprite = sprite;
             arrowImage.enabled = true;
         }

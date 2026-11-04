@@ -46,8 +46,10 @@ Assets/Scripts/Training/
    - Объект персонажа с `Animator` (контроллер ниже).
    - `AudioSource` для звуков.
    - На объект `TrainingFeedbackView` привяжи текст, аниматор и звуки.
-   - Префаб `NoteView`: Image (стрелка) + компонент `TrainingNoteView`,
-     назначь 4 спрайта стрелок.
+   - Префаб `NoteView` должен быть отдельным объектом `UI → Image` с
+     компонентом `TrainingNoteView` и четырьмя спрайтами стрелок. Не создавай
+     его перетаскиванием всего Canvas в Project. Цвет Image оставь белым и
+     непрозрачным; прозрачный фон должен быть в PNG-спрайтах.
    - В `TrainingSessionRunner` перетащи все ссылки.
 
 3. **Animator персонажа**: контроллер с триггерами `TrainingSuccess` и

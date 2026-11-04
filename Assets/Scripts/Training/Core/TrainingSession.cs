@@ -132,9 +132,12 @@ namespace VisualNovel.Training
             for (int i = 0; i < notes.Count; i++)
             {
                 var note = notes[i];
-                if (note.IsResolved) continue;
+                if (note.IsResolved || note.IsVisible) continue;
                 if (elapsed >= note.HitTime - config.noteTravelTime)
+                {
+                    note.MarkVisible();
                     NoteBecameVisible?.Invoke(i, note);
+                }
             }
         }
 

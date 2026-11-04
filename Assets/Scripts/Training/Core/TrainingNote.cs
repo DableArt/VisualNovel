@@ -16,11 +16,16 @@ namespace VisualNovel.Training
         /// <summary>Нота уже разыграна (попадание или промах).</summary>
         public bool IsResolved { get; private set; }
 
+        /// <summary>Нота уже была показана игроку.</summary>
+        public bool IsVisible { get; private set; }
+
         public TrainingNote(Key key, float hitTime)
         {
             Key = key;
             HitTime = hitTime;
         }
+
+        public void MarkVisible() => IsVisible = true;
 
         public void Resolve() => IsResolved = true;
     }
