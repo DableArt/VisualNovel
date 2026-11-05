@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81c2df1e58344e3aa3fff6f66bbed6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisualNovel.Training.TrainingNoteView
+  noteSize: {x: 80, y: 80}
   arrowImage: {fileID: 98560558670341324}
   leftSprite: {fileID: 1218268146595743105, guid: 863c8cc150e204f4e9a7d9540f5fb526, type: 3}
   downSprite: {fileID: -4432714776453720695, guid: 75b1866443fef7f42890cc1105cca3e6, type: 3}
@@ -432,6 +433,7 @@ GameObject:
   - component: {fileID: 4461196629824258682}
   - component: {fileID: 1334983983818134815}
   - component: {fileID: 5700189805092762726}
+  - component: {fileID: 5714560915972378959}
   m_Layer: 5
   m_Name: 'PhraseText '
   m_TagString: Untagged
@@ -558,3 +560,23 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5714560915972378959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337594559079099384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daa03a661034bdf8b39b60ec49d3ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisualNovel.Training.TrainingFeedbackView
+  phraseText: {fileID: 0}
+  phraseShowTime: 0.8
+  characterAnimator: {fileID: 0}
+  successTrigger: TrainingSuccess
+  missTrigger: TrainingMiss
+  audioSource: {fileID: 0}
+  hitClip: {fileID: 0}
+  missClip: {fileID: 0}
