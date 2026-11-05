@@ -1,0 +1,54 @@
+{
+  "startNodeId": "intro",
+  "nodes": [
+    {
+      "id": "intro",
+      "speaker": "Рассказчик",
+      "text": "Демо-узел. Сюжета пока нет — просто выбери любой ответ.",
+      "sceneAnimationId": "",
+      "musicId": "event:/Music/Theme",
+      "sfxId": "",
+      "voiceId": "voice_intro_01",
+      "timeoutNextNodeId": "idle_path",
+      "choices": [
+        { "text": "Ответ первый", "nextNodeId": "path_a" },
+        { "text": "Ответ второй", "nextNodeId": "path_b" },
+        { "text": "Ответ третий", "nextNodeId": "path_a" },
+        { "text": "Ответ четвёртый", "nextNodeId": "path_b" }
+      ]
+    },
+    {
+      "id": "path_a",
+      "speaker": "Рассказчик",
+      "text": "Выбран вариант А. Сцена завершена.",
+      "sceneAnimationId": "Scene_A",
+      "musicId": "",
+      "sfxId": "event:/Sfx/Confirm",
+      "voiceId": "",
+      "timeoutNextNodeId": "",
+      "choices": []
+    },
+    {
+      "id": "path_b",
+      "speaker": "Рассказчик",
+      "text": "Выбран вариант Б. Сцена завершена.",
+      "sceneAnimationId": "Scene_B",
+      "musicId": "",
+      "sfxId": "event:/Sfx/Confirm",
+      "voiceId": "",
+      "timeoutNextNodeId": "",
+      "choices": []
+    },
+    {
+      "id": "idle_path",
+      "speaker": "Рассказчик",
+      "text": "Герой промолчал (таймаут → бездействие). Сцена завершена.",
+      "sceneAnimationId": "",
+      "musicId": "",
+      "sfxId": "",
+      "voiceId": "",
+      "timeoutNextNodeId": "",
+      "choices": []
+    }
+  ]
+}
