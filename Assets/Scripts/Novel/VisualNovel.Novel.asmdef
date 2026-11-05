@@ -1,0 +1,15 @@
+{
+    "name": "VisualNovel.Novel",
+    "rootNamespace": "VisualNovel.Novel",
+    "references": [
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "noEngineReferences": false
+}
