@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2807019}
   - component: {fileID: 2807018}
   - component: {fileID: 2807017}
+  - component: {fileID: 900000105}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -252,6 +253,7 @@ GameObject:
   - component: {fileID: 28906697}
   - component: {fileID: 28906696}
   - component: {fileID: 28906695}
+  - component: {fileID: 900000103}
   m_Layer: 5
   m_Name: LoadingSaveGameButton
   m_TagString: Untagged
@@ -647,6 +649,7 @@ GameObject:
   - component: {fileID: 237051945}
   - component: {fileID: 237051944}
   - component: {fileID: 237051943}
+  - component: {fileID: 900000104}
   m_Layer: 5
   m_Name: AdditionalMaterialsButton
   m_TagString: Untagged
@@ -1121,6 +1124,7 @@ GameObject:
   - component: {fileID: 781942373}
   - component: {fileID: 781942372}
   - component: {fileID: 781942371}
+  - component: {fileID: 900000101}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -1516,6 +1520,7 @@ GameObject:
   - component: {fileID: 1324524738}
   - component: {fileID: 1324524737}
   - component: {fileID: 1324524736}
+  - component: {fileID: 900000102}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -1866,6 +1871,7 @@ GameObject:
   - component: {fileID: 1984715689}
   - component: {fileID: 1984715688}
   - component: {fileID: 1984715687}
+  - component: {fileID: 900000100}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1975,6 +1981,7 @@ GameObject:
   - component: {fileID: 2073579802}
   - component: {fileID: 2073579801}
   - component: {fileID: 2073579800}
+  - component: {fileID: 900000106}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -2084,6 +2091,116 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073579798}
   m_CullTransparentMesh: 1
+--- !u!114 &900000100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984715686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45406b648c674cbb8ed22dabc0e0f639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuRunner
+  buttons:
+  - command: 0
+    button: {fileID: 900000101}
+  - command: 1
+    button: {fileID: 900000102}
+  - command: 2
+    button: {fileID: 900000103}
+  - command: 3
+    button: {fileID: 900000104}
+  - command: 4
+    button: {fileID: 900000105}
+  - command: 5
+    button: {fileID: 900000106}
+  hasSaveGame: 0
+--- !u!114 &900000101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781942369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 781942372}
+  label: {fileID: 282208623}
+--- !u!114 &900000102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324524734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 1324524737}
+  label: {fileID: 932565895}
+--- !u!114 &900000103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28906693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 28906696}
+  label: {fileID: 966193863}
+--- !u!114 &900000104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237051941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 237051944}
+  label: {fileID: 91235403}
+--- !u!114 &900000105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 2807018}
+  label: {fileID: 722398542}
+--- !u!114 &900000106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073579798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d872dc615f420b8eb8aa0d523825ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuButtonView
+  background: {fileID: 2073579801}
+  label: {fileID: 1585358882}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
