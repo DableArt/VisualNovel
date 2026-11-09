@@ -1,0 +1,21 @@
+{
+    "name": "VisualNovel.MainMenu.Tests",
+    "rootNamespace": "VisualNovel.MainMenu.Tests",
+    "references": [
+        "VisualNovel.MainMenu"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "noEngineReferences": false
+}
