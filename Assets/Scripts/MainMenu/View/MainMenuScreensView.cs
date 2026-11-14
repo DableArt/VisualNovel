@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace VisualNovel.MainMenu
 {
@@ -35,6 +36,11 @@ namespace VisualNovel.MainMenu
 
         private void OnTransitionStarted(MainMenuScreen from, MainMenuScreen to)
         {
+            // Снимаем выделение до скрытия панели: иначе EventSystem держит
+            // выключенный объект выбранным — навигация и нажатия ломаются.
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(null);
+
             if (switching != null) StopCoroutine(switching);
 
             switching = StartCoroutine(SwitchRoutine(from, to));

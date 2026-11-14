@@ -54,6 +54,20 @@ namespace VisualNovel.MainMenu
             ApplyState(model.CurrentState); // обновить disabled-цвет текста
         }
 
+        private void OnEnable()
+        {
+            // Повторное появление панели: гарантированно чистый визуал.
+            if (model != null) ApplyState(model.CurrentState);
+        }
+
+        private void OnDisable()
+        {
+            // Unity не шлёт OnPointerExit/OnDeselect выключаемым объектам —
+            // сбрасываем состояние вручную, иначе hover/press «зависает»,
+            // пока панель скрыта.
+            model.ForceReset();
+        }
+
         public void OnPointerEnter(PointerEventData eventData) => model.PointerEnter();
 
         public void OnPointerExit(PointerEventData eventData) => model.PointerExit();

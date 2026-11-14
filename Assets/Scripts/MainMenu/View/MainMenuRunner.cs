@@ -48,6 +48,7 @@ namespace VisualNovel.MainMenu
             Core.StateChanged += OnCoreStateChanged;
             Core.CommandInvoked += OnCommandInvoked;
             Core.SaveAvailabilityChanged += OnSaveAvailabilityChanged;
+            Core.TransitionFinished += OnTransitionFinished;
 
             foreach (var binding in buttons)
             {
@@ -75,6 +76,8 @@ namespace VisualNovel.MainMenu
         }
 
         private void OnSaveAvailabilityChanged(bool available) => RefreshButtons();
+
+        private void OnTransitionFinished(MainMenuScreen screen) => RefreshButtons();
 
         private void RefreshButtons()
         {
@@ -128,6 +131,7 @@ namespace VisualNovel.MainMenu
                 Core.StateChanged -= OnCoreStateChanged;
                 Core.CommandInvoked -= OnCommandInvoked;
                 Core.SaveAvailabilityChanged -= OnSaveAvailabilityChanged;
+                Core.TransitionFinished -= OnTransitionFinished;
             }
         }
     }

@@ -98,5 +98,54 @@ namespace VisualNovel.MainMenu.Tests
 
             Assert.AreEqual(MenuButtonVisualState.Pressed, model.CurrentState);
         }
+
+        [Test]
+        public void ForceReset_ClearsHoveredState()
+        {
+            model.PointerEnter();
+
+            model.ForceReset();
+
+            Assert.AreEqual(MenuButtonVisualState.NotActive, model.CurrentState);
+            Assert.IsFalse(model.IsPointerInside);
+            Assert.AreEqual(
+                new[] { MenuButtonVisualState.Hovered, MenuButtonVisualState.NotActive },
+                states.ToArray());
+        }
+
+        [Test]
+        public void ForceReset_ClearsPressedState()
+        {
+            model.PointerEnter();
+            model.PointerDown();
+
+            model.ForceReset();
+
+            Assert.AreEqual(MenuButtonVisualState.NotActive, model.CurrentState);
+            Assert.IsFalse(model.IsPointerInside);
+        }
+
+        [Test]
+        public void ForceReset_WhenNotActive_NoEvent()
+        {
+            model.ForceReset();
+
+            Assert.AreEqual(MenuButtonVisualState.NotActive, model.CurrentState);
+            Assert.IsEmpty(states);
+        }
+
+        [Test]
+        public void WorksAgainAfterForceReset()
+        {
+            // Сценарий: панель скрыли в момент hover → сброс → показали снова.
+            model.PointerEnter();
+            model.ForceReset();
+
+            model.PointerEnter();
+            Assert.AreEqual(MenuButtonVisualState.Hovered, model.CurrentState);
+
+            model.PointerDown();
+            Assert.AreEqual(MenuButtonVisualState.Pressed, model.CurrentState);
+        }
     }
 }

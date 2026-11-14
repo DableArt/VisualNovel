@@ -70,6 +70,17 @@ namespace VisualNovel.MainMenu
             SetState(IsPointerInside ? MenuButtonVisualState.Hovered : MenuButtonVisualState.NotActive);
         }
 
+        /// <summary>
+        /// Безусловный сброс в NotActive. Вью вызывает при деактивации объекта:
+        /// Unity не отправляет OnPointerExit/OnDeselect выключаемым объектам,
+        /// без сброса состояние «зависает».
+        /// </summary>
+        public void ForceReset()
+        {
+            IsPointerInside = false;
+            SetState(MenuButtonVisualState.NotActive);
+        }
+
         private void SetState(MenuButtonVisualState next)
         {
             if (CurrentState == next) return;
