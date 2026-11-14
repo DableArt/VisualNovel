@@ -144,6 +144,9 @@ namespace VisualNovel.MainMenu
         {
             if (slider == null) return;
 
+            // Страховка: минимум слева, максимум справа — независимо от сцены.
+            slider.direction = Slider.Direction.LeftToRight;
+
             model.RegisterFloat(key, slider.value);
             slider.onValueChanged.AddListener(value =>
             {

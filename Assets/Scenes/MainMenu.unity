@@ -28941,9 +28941,9 @@ MonoBehaviour:
   acceptButton: {fileID: 1707181215}
   resetButton: {fileID: 63701072}
   minBrightness: 0
-  maxBrightness: 2
+  maxBrightness: 3
   minContrast: 0
-  maxContrast: 2
+  maxContrast: 3
 --- !u!225 &900000140
 CanvasGroup:
   m_ObjectHideFlags: 0
