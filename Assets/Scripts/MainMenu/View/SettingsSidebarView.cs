@@ -67,8 +67,9 @@ namespace VisualNovel.MainMenu
 
         private void SetAllNormal()
         {
-            foreach (var tab in tabs)
-                SetHover(tab.background, false);
+            // tabs[0] — активный раздел, его белую плашку не трогаем.
+            for (int i = 1; i < tabs.Length; i++)
+                SetHover(tabs[i].background, false);
         }
 
         private static void AddHandler(EventTrigger trigger, EventTriggerType type, Action action)
