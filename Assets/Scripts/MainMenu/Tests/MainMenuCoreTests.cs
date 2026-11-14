@@ -95,6 +95,73 @@ namespace VisualNovel.MainMenu.Tests
         }
 
         [Test]
+        public void OpenSettings_StartsTransition_AndBlocksCommands()
+        {
+            var transitions = new List<(MainMenuScreen, MainMenuScreen)>();
+            core.TransitionStarted += (from, to) => transitions.Add((from, to));
+            core.CompleteIntro();
+
+            Assert.IsTrue(core.OpenSettings());
+
+            Assert.IsTrue(core.IsTransitioning);
+            Assert.AreEqual(MainMenuScreen.Main, core.CurrentScreen); // экран сменится по концу анимации
+            Assert.AreEqual(new[] { (MainMenuScreen.Main, MainMenuScreen.Settings) }, transitions.ToArray());
+            Assert.IsFalse(core.InvokeCommand(MainMenuCommand.Settings));
+            Assert.IsFalse(core.OpenSettings()); // повторный переход во время анимации игнорируется
+        }
+
+        [Test]
+        public void CompleteTransition_ActivatesTargetScreen()
+        {
+            MainMenuScreen? finished = null;
+            core.TransitionFinished += s => finished = s;
+            core.CompleteIntro();
+
+            core.OpenSettings();
+            core.CompleteTransition();
+
+            Assert.IsFalse(core.IsTransitioning);
+            Assert.AreEqual(MainMenuScreen.Settings, core.CurrentScreen);
+            Assert.AreEqual(MainMenuScreen.Settings, finished);
+        }
+
+        [Test]
+        public void BackToMain_ReturnsToMainScreen()
+        {
+            core.CompleteIntro();
+            core.OpenSettings();
+            core.CompleteTransition();
+
+            Assert.IsTrue(core.BackToMain());
+            core.CompleteTransition();
+
+            Assert.AreEqual(MainMenuScreen.Main, core.CurrentScreen);
+        }
+
+        [Test]
+        public void Transitions_BlockedOutsideIdle()
+        {
+            Assert.IsFalse(core.OpenSettings()); // Intro
+
+            core.CompleteIntro();
+            core.HasSaveGame = true;
+            core.InvokeCommand(MainMenuCommand.NewGame); // Leaving
+
+            Assert.IsFalse(core.OpenSettings());
+            Assert.IsFalse(core.IsTransitioning);
+        }
+
+        [Test]
+        public void CompleteTransition_WithoutTransition_IsIgnored()
+        {
+            core.CompleteIntro();
+            core.CompleteTransition();
+
+            Assert.AreEqual(MainMenuScreen.Main, core.CurrentScreen);
+            Assert.IsFalse(core.IsTransitioning);
+        }
+
+        [Test]
         public void ReturnToMenu_RestartsIntro()
         {
             core.CompleteIntro();
