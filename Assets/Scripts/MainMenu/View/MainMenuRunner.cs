@@ -20,8 +20,12 @@ namespace VisualNovel.MainMenu
             public MainMenuButtonView button;
         }
 
-        [Header("Кнопки")]
+        [Header("Кнопки главного экрана")]
         [SerializeField] private ButtonBinding[] buttons = new ButtonBinding[0];
+
+        [Header("Экраны")]
+        [SerializeField] private MainMenuScreensView screensView;
+        [SerializeField] private MainSettingsView settingsView;
 
         [Header("Заглушки (пока нет систем)")]
         [Tooltip("Временно: есть ли сохранение. Потом значение придёт из системы сохранений")]
@@ -34,6 +38,9 @@ namespace VisualNovel.MainMenu
 
         /// <summary>Ядро меню (для внешних систем: сохранения, отладка).</summary>
         public MainMenuCore Core { get; private set; }
+
+        /// <summary>Черновик настроек (пока не сохраняется — система настроек будет позже).</summary>
+        public SettingsDraftModel SettingsDraft { get; private set; }
 
         private void Start()
         {
@@ -49,6 +56,10 @@ namespace VisualNovel.MainMenu
                 var command = binding.command; // захват для замыкания
                 binding.button.Clicked += () => Core.InvokeCommand(command);
             }
+
+            SettingsDraft = new SettingsDraftModel();
+            if (screensView != null) screensView.Bind(Core);
+            if (settingsView != null) settingsView.Bind(SettingsDraft, Core);
 
             RefreshButtons();
 
@@ -91,7 +102,7 @@ namespace VisualNovel.MainMenu
                     Debug.Log("[MainMenu] Доп. материалы (TODO: подменю)", this);
                     break;
                 case MainMenuCommand.Settings:
-                    Debug.Log("[MainMenu] Настройки (TODO: подменю)", this);
+                    Core.OpenSettings();
                     break;
                 case MainMenuCommand.Exit:
                     ExitGame();

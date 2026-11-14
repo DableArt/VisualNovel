@@ -249,6 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 24300373}
+  - component: {fileID: 900000111}
   m_Layer: 5
   m_Name: MainSettings
   m_TagString: Untagged
@@ -1742,7 +1743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &134572234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6536,7 +6537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &726844150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7693,6 +7694,8 @@ MonoBehaviour:
   - command: 5
     button: {fileID: 900000106}
   hasSaveGame: 0
+  screensView: {fileID: 900000110}
+  settingsView: {fileID: 900000111}
 --- !u!114 &900000101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11590,7 +11593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1273136952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18244,6 +18247,7 @@ GameObject:
   - component: {fileID: 1984715688}
   - component: {fileID: 1984715687}
   - component: {fileID: 900000100}
+  - component: {fileID: 900000110}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -19914,6 +19918,59 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &900000110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984715686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774a44c9077643888601632c062cd2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuScreensView
+  mainPanel: {fileID: 726844149}
+  settingsPanel: {fileID: 1273136951}
+  transitionDuration: 0
+--- !u!114 &900000111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24300372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9afa6e68ef8423082a042da3556a84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainSettingsView
+  dropdowns:
+  - key: language
+    dropdown: {fileID: 1557705443}
+  - key: voiceover
+    dropdown: {fileID: 2048949322}
+  - key: subtitles
+    dropdown: {fileID: 1677896159}
+  - key: autosave
+    dropdown: {fileID: 566292676}
+  - key: education
+    dropdown: {fileID: 1409077506}
+  - key: electionTips
+    dropdown: {fileID: 1634356434}
+  - key: colorFilter
+    dropdown: {fileID: 1102052687}
+  - key: dyslexiaMode
+    dropdown: {fileID: 1778190438}
+  - key: streamerMode
+    dropdown: {fileID: 1229426139}
+  - key: gameplayComplexity
+    dropdown: {fileID: 1619372311}
+  - key: timeToChoose
+    dropdown: {fileID: 316122454}
+  backButton: {fileID: 495210768}
+  resetButton: {fileID: 63701072}
+  acceptButton: {fileID: 134572233}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
