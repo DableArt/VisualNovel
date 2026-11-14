@@ -92,5 +92,37 @@ namespace VisualNovel.MainMenu.Tests
         {
             Assert.Throws<System.InvalidOperationException>(() => model.SetValue("unknown", 1));
         }
+
+        [Test]
+        public void FloatValues_MarkDirty_AndReset()
+        {
+            model.RegisterFloat("brightness", 0.5f);
+            Assert.IsFalse(model.IsDirty);
+
+            model.SetFloatValue("brightness", 0.9f);
+            Assert.IsTrue(model.IsDirty);
+            Assert.AreEqual(0.9f, model.GetFloatValue("brightness"), 0.001f);
+
+            model.ResetToDefaults();
+            Assert.IsFalse(model.IsDirty);
+            Assert.AreEqual(0.5f, model.GetFloatValue("brightness"), 0.001f);
+        }
+
+        [Test]
+        public void SetFloatValue_SameValue_IsIgnored()
+        {
+            model.RegisterFloat("brightness", 0.5f);
+
+            model.SetFloatValue("brightness", 0.5f);
+
+            Assert.IsFalse(model.IsDirty);
+            Assert.IsEmpty(dirtyFlags);
+        }
+
+        [Test]
+        public void SetFloatValue_UnknownKey_Throws()
+        {
+            Assert.Throws<System.InvalidOperationException>(() => model.SetFloatValue("unknown", 1f));
+        }
     }
 }
