@@ -150,7 +150,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 722398541}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -323,7 +324,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 966193862}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1303,11 +1305,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 237051942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1333.86, y: -98.899994}
+  m_AnchoredPosition: {x: 2181.96, y: 0}
   m_SizeDelta: {x: 551, y: 42}
   m_Pivot: {x: 3.94, y: 0.5}
 --- !u!114 &91235403
@@ -2239,7 +2241,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 91235402}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2868,11 +2871,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 781942370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -572.85, y: 68.199974}
+  m_AnchoredPosition: {x: 276.5, y: 0}
   m_SizeDelta: {x: 553, y: 52}
   m_Pivot: {x: 0.48, y: 0.5}
 --- !u!114 &282208623
@@ -6415,11 +6418,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 2807016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1333.86, y: -171.2}
+  m_AnchoredPosition: {x: 2181.96, y: 0}
   m_SizeDelta: {x: 551, y: 42}
   m_Pivot: {x: 3.94, y: 0.5}
 --- !u!114 &722398542
@@ -6552,17 +6555,11 @@ RectTransform:
   m_Children:
   - {fileID: 212092885}
   - {fileID: 781942370}
-  - {fileID: 282208622}
   - {fileID: 1324524735}
-  - {fileID: 932565894}
   - {fileID: 28906694}
-  - {fileID: 966193862}
   - {fileID: 237051942}
-  - {fileID: 91235402}
   - {fileID: 2807016}
-  - {fileID: 722398541}
   - {fileID: 2073579799}
-  - {fileID: 1585358881}
   m_Father: {fileID: 1984715690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6846,7 +6843,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 282208622}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -7693,9 +7691,9 @@ MonoBehaviour:
     button: {fileID: 900000105}
   - command: 5
     button: {fileID: 900000106}
-  hasSaveGame: 0
   screensView: {fileID: 900000110}
   settingsView: {fileID: 900000111}
+  hasSaveGame: 1
 --- !u!114 &900000101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7804,6 +7802,59 @@ MonoBehaviour:
   pressedTextColor: {r: 0.85, g: 0.12, b: 0.16, a: 1}
   disabledTextColor: {r: 0.196, g: 0.196, b: 0.196, a: 0.4}
   hoverBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &900000110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984715686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774a44c9077643888601632c062cd2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuScreensView
+  mainPanel: {fileID: 726844149}
+  settingsPanel: {fileID: 1273136951}
+  transitionDuration: 0
+--- !u!114 &900000111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24300372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9afa6e68ef8423082a042da3556a84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainSettingsView
+  dropdowns:
+  - key: language
+    dropdown: {fileID: 1557705443}
+  - key: voiceover
+    dropdown: {fileID: 2048949322}
+  - key: subtitles
+    dropdown: {fileID: 1677896159}
+  - key: autosave
+    dropdown: {fileID: 566292676}
+  - key: education
+    dropdown: {fileID: 1409077506}
+  - key: electionTips
+    dropdown: {fileID: 1634356434}
+  - key: colorFilter
+    dropdown: {fileID: 1102052687}
+  - key: dyslexiaMode
+    dropdown: {fileID: 1778190438}
+  - key: streamerMode
+    dropdown: {fileID: 1229426139}
+  - key: gameplayComplexity
+    dropdown: {fileID: 1619372311}
+  - key: timeToChoose
+    dropdown: {fileID: 316122454}
+  backButton: {fileID: 495210768}
+  resetButton: {fileID: 63701072}
+  acceptButton: {fileID: 134572233}
 --- !u!1 &913492496
 GameObject:
   m_ObjectHideFlags: 0
@@ -8145,11 +8196,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 1324524735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1333.86, y: 7.6400137}
+  m_AnchoredPosition: {x: 2181.96, y: 0}
   m_SizeDelta: {x: 551, y: 42}
   m_Pivot: {x: 3.94, y: 0.5}
 --- !u!114 &932565895
@@ -8419,11 +8470,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 28906694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1333.86, y: -41.869984}
+  m_AnchoredPosition: {x: 2181.96, y: 0}
   m_SizeDelta: {x: 551, y: 42}
   m_Pivot: {x: 3.94, y: 0.5}
 --- !u!114 &966193863
@@ -11850,7 +11901,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 932565894}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -14214,11 +14266,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 726844150}
+  m_Father: {fileID: 2073579799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1333.86, y: -231.1}
+  m_AnchoredPosition: {x: 2181.96, y: 0}
   m_SizeDelta: {x: 551, y: 42}
   m_Pivot: {x: 3.94, y: 0.5}
 --- !u!114 &1585358882
@@ -19382,7 +19434,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1585358881}
   m_Father: {fileID: 726844150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -19918,59 +19971,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &900000110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984715686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774a44c9077643888601632c062cd2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainMenuScreensView
-  mainPanel: {fileID: 726844149}
-  settingsPanel: {fileID: 1273136951}
-  transitionDuration: 0
---- !u!114 &900000111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24300372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9afa6e68ef8423082a042da3556a84f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: VisualNovel.MainMenu::VisualNovel.MainMenu.MainSettingsView
-  dropdowns:
-  - key: language
-    dropdown: {fileID: 1557705443}
-  - key: voiceover
-    dropdown: {fileID: 2048949322}
-  - key: subtitles
-    dropdown: {fileID: 1677896159}
-  - key: autosave
-    dropdown: {fileID: 566292676}
-  - key: education
-    dropdown: {fileID: 1409077506}
-  - key: electionTips
-    dropdown: {fileID: 1634356434}
-  - key: colorFilter
-    dropdown: {fileID: 1102052687}
-  - key: dyslexiaMode
-    dropdown: {fileID: 1778190438}
-  - key: streamerMode
-    dropdown: {fileID: 1229426139}
-  - key: gameplayComplexity
-    dropdown: {fileID: 1619372311}
-  - key: timeToChoose
-    dropdown: {fileID: 316122454}
-  backButton: {fileID: 495210768}
-  resetButton: {fileID: 63701072}
-  acceptButton: {fileID: 134572233}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
