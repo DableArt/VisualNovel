@@ -72,7 +72,13 @@ namespace VisualNovel.MainMenu
 
         private void OnBackClicked() => core.BackToMain();
 
-        private void OnResetClicked() => model.ResetToDefaults();
+        private void OnResetClicked()
+        {
+            // Кнопка сброса общая на все разделы — сбрасываем только видимый.
+            if (!gameObject.activeInHierarchy) return;
+
+            model.ResetToDefaults();
+        }
 
         private void OnDestroy()
         {

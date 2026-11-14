@@ -26,6 +26,8 @@ namespace VisualNovel.MainMenu
         [Header("Экраны")]
         [SerializeField] private MainMenuScreensView screensView;
         [SerializeField] private MainSettingsView settingsView;
+        [SerializeField] private DisplaySettingsView displaySettingsView;
+        [SerializeField] private SettingsSectionSwitcher sectionSwitcher;
 
         [Header("Заглушки (пока нет систем)")]
         [Tooltip("Временно: есть ли сохранение. Потом значение придёт из системы сохранений")]
@@ -41,6 +43,9 @@ namespace VisualNovel.MainMenu
 
         /// <summary>Черновик настроек (пока не сохраняется — система настроек будет позже).</summary>
         public SettingsDraftModel SettingsDraft { get; private set; }
+
+        /// <summary>Черновик настроек дисплея (своя кнопка «Принять»).</summary>
+        public SettingsDraftModel DisplaySettingsDraft { get; private set; }
 
         private void Start()
         {
@@ -59,8 +64,11 @@ namespace VisualNovel.MainMenu
             }
 
             SettingsDraft = new SettingsDraftModel();
+            DisplaySettingsDraft = new SettingsDraftModel();
             if (screensView != null) screensView.Bind(Core);
             if (settingsView != null) settingsView.Bind(SettingsDraft, Core);
+            if (displaySettingsView != null) displaySettingsView.Bind(DisplaySettingsDraft);
+            if (sectionSwitcher != null) sectionSwitcher.ResetToDefault();
 
             RefreshButtons();
 
@@ -77,7 +85,14 @@ namespace VisualNovel.MainMenu
 
         private void OnSaveAvailabilityChanged(bool available) => RefreshButtons();
 
-        private void OnTransitionFinished(MainMenuScreen screen) => RefreshButtons();
+        private void OnTransitionFinished(MainMenuScreen screen)
+        {
+            RefreshButtons();
+
+            // При каждом входе в настройки — стартовый раздел «Основные».
+            if (screen == MainMenuScreen.Settings && sectionSwitcher != null)
+                sectionSwitcher.ResetToDefault();
+        }
 
         private void RefreshButtons()
         {
