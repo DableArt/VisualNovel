@@ -7,10 +7,12 @@ namespace VisualNovel.MainMenu
 {
     /// <summary>
     /// Переключатель экранов меню (главное ↔ настройки). Подписывается на
-    /// <see cref="MainMenuCore.TransitionStarted"/> и проигрывает переход.
-    /// Анимации пока нет — переключение мгновенное, но точка расширения готова:
-    /// анимацию ухода/появления панелей вставить в <see cref="SwitchRoutine"/>,
-    /// а <see cref="MainMenuCore.CompleteTransition"/> вызывать по её концу.
+    /// <see cref="MainMenuCore.TransitionStarted"/> и проигрывает переход:
+    /// главное → настройки — покадровая анимация (<see cref="TransitionFramePlayerView"/>),
+    /// панели переключаются в середине кадров; настройки → главное — мгновенно.
+    /// Контент целевого экрана появляется фейдом (CanvasGroup), ввод на нём
+    /// заблокирован до конца фейда. По завершении вызывает
+    /// <see cref="MainMenuCore.CompleteTransition"/> — ядро разблокирует команды.
     /// </summary>
     public sealed class MainMenuScreensView : MonoBehaviour
     {
@@ -18,9 +20,14 @@ namespace VisualNovel.MainMenu
         [SerializeField] private GameObject mainPanel;
         [SerializeField] private GameObject settingsPanel;
 
-        [Header("Переход (заглушка под анимацию)")]
-        [Tooltip("Задержка переключения, сек. Пока анимации нет — 0: мгновенно")]
-        [SerializeField, Min(0f)] private float transitionDuration;
+        [Header("Переход")]
+        [Tooltip("Покадровая анимация перехода в настройки. Пусто/без кадров — мгновенное переключение")]
+        [SerializeField] private TransitionFramePlayerView framePlayer;
+        [Tooltip("Группы контента для фейд-появления (CanvasGroup на панелях)")]
+        [SerializeField] private CanvasGroup mainPanelGroup;
+        [SerializeField] private CanvasGroup settingsPanelGroup;
+        [Tooltip("Длительность фейд-появления контента, сек. 0 — мгновенно")]
+        [SerializeField, Min(0f)] private float fadeDuration = 0.3f;
 
         private MainMenuCore core;
         private Coroutine switching;
@@ -48,32 +55,93 @@ namespace VisualNovel.MainMenu
 
         private IEnumerator SwitchRoutine(MainMenuScreen from, MainMenuScreen to)
         {
-            // TODO: анимация ухода экрана from и появления экрана to.
-            // Пока — мгновенное переключение панелей.
             var fromPanel = PanelFor(from);
-            if (fromPanel != null) fromPanel.SetActive(false);
+            var toPanel = PanelFor(to);
+            var targetGroup = GroupFor(to);
 
-            ShowPanel(to);
+            // Целевая панель включается невидимой — появится фейдом.
+            if (targetGroup != null)
+            {
+                targetGroup.alpha = 0f;
+                targetGroup.interactable = false;
+                targetGroup.blocksRaycasts = false;
+            }
 
-            if (transitionDuration > 0f)
-                yield return new WaitForSeconds(transitionDuration);
+            // Покадровая анимация — только при входе в настройки.
+            // Обратный переход мгновенный; кадры для него можно добавить позже.
+            bool withFrames = framePlayer != null && framePlayer.HasFrames
+                && from == MainMenuScreen.Main && to == MainMenuScreen.Settings;
+
+            if (withFrames)
+            {
+                yield return framePlayer.Play(() =>
+                {
+                    if (fromPanel != null) fromPanel.SetActive(false);
+                    if (toPanel != null) toPanel.SetActive(true);
+                });
+            }
             else
-                yield return null;
+            {
+                if (fromPanel != null) fromPanel.SetActive(false);
+                if (toPanel != null) toPanel.SetActive(true);
+            }
+
+            if (targetGroup != null)
+            {
+                yield return FadeIn(targetGroup);
+                targetGroup.interactable = true;
+                targetGroup.blocksRaycasts = true;
+            }
 
             switching = null;
             core.CompleteTransition();
+        }
+
+        private IEnumerator FadeIn(CanvasGroup group)
+        {
+            if (fadeDuration <= 0f)
+            {
+                group.alpha = 1f;
+                yield break;
+            }
+
+            float elapsed = 0f;
+            while (elapsed < fadeDuration)
+            {
+                elapsed += Time.deltaTime;
+                group.alpha = Mathf.Clamp01(elapsed / fadeDuration);
+                yield return null;
+            }
+
+            group.alpha = 1f;
         }
 
         private void ShowPanel(MainMenuScreen screen)
         {
             if (mainPanel != null) mainPanel.SetActive(screen == MainMenuScreen.Main);
             if (settingsPanel != null) settingsPanel.SetActive(screen == MainMenuScreen.Settings);
+
+            // Начальное состояние без анимации: активный экран сразу виден и интерактивен.
+            var active = GroupFor(screen);
+            if (active != null)
+            {
+                active.alpha = 1f;
+                active.interactable = true;
+                active.blocksRaycasts = true;
+            }
         }
 
         private GameObject PanelFor(MainMenuScreen screen) => screen switch
         {
             MainMenuScreen.Main => mainPanel,
             MainMenuScreen.Settings => settingsPanel,
+            _ => null
+        };
+
+        private CanvasGroup GroupFor(MainMenuScreen screen) => screen switch
+        {
+            MainMenuScreen.Main => mainPanelGroup,
+            MainMenuScreen.Settings => settingsPanelGroup,
             _ => null
         };
 
