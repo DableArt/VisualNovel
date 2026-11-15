@@ -7,6 +7,7 @@ namespace VisualNovel.Novel
     /// Ядро визуальной новеллы. Чистый C#-класс без зависимостей на визуал:
     /// ведёт граф диалога, показывает варианты ответа (не больше
     /// <see cref="NovelCoreConfig.HardMaxChoices"/>), считает таймер выбора
+    /// (стартует по <see cref="BeginChoiceTimer"/> — после появления UI)
     /// и по таймауту разыгрывает «бездействие». Обо всём сообщает событиями.
     /// Анимированные сценки и аудио — снаружи, через события и IAudioService.
     /// </summary>
@@ -30,6 +31,16 @@ namespace VisualNovel.Novel
 
         /// <summary>Остаток времени на выбор (секунды). Актуально в состоянии AwaitingChoice.</summary>
         public float RemainingChoiceTime { get; private set; }
+
+        /// <summary>Лимит времени для текущего узла (override узла, иначе конфиг). 0 = без таймера.</summary>
+        public float CurrentChoiceTimeLimit { get; private set; }
+
+        /// <summary>
+        /// Идёт ли отсчёт. Таймер взводится при показе вариантов, но стартует
+        /// только после <see cref="BeginChoiceTimer"/> — View вызывает его,
+        /// когда анимации появления UI завершены.
+        /// </summary>
+        public bool ChoiceTimerRunning { get; private set; }
 
         /// <summary>Вошли в узел: можно играть сценку, менять фон, показывать текст.</summary>
         public event Action<DialogueNode> NodeEntered;
@@ -73,10 +84,20 @@ namespace VisualNovel.Novel
             EnterNode(startNodeId);
         }
 
+        /// <summary>
+        /// Запускает отсчёт времени выбора. Вызывается из View после завершения
+        /// анимаций появления. Безопасен при повторном вызове и при выключенном таймере.
+        /// </summary>
+        public void BeginChoiceTimer()
+        {
+            if (CurrentState != State.AwaitingChoice || CurrentChoiceTimeLimit <= 0f) return;
+            ChoiceTimerRunning = true;
+        }
+
         /// <summary>Вызывается каждый кадр из MonoBehaviour-обёртки (таймер выбора).</summary>
         public void Tick(float deltaTime)
         {
-            if (CurrentState != State.AwaitingChoice || config.choiceTimeLimit <= 0f) return;
+            if (CurrentState != State.AwaitingChoice || !ChoiceTimerRunning) return;
 
             RemainingChoiceTime -= deltaTime;
             if (RemainingChoiceTime <= 0f)
@@ -94,6 +115,7 @@ namespace VisualNovel.Novel
 
             var option = presented[index];
             CurrentState = State.Idle; // останавливаем таймер на время перехода
+            ChoiceTimerRunning = false;
             ChoiceResolved?.Invoke(option, false);
             Navigate(option.nextNodeId);
             return true;
@@ -109,6 +131,7 @@ namespace VisualNovel.Novel
 
             var idle = new ChoiceOption(config.idleChoiceText, target);
             CurrentState = State.Idle;
+            ChoiceTimerRunning = false;
             ChoiceResolved?.Invoke(idle, true);
             Navigate(target);
         }
@@ -145,9 +168,13 @@ namespace VisualNovel.Novel
 
             int count = Math.Min(config.maxChoices, node.choices.Count);
             presented = node.choices.GetRange(0, count);
-            RemainingChoiceTime = config.choiceTimeLimit;
+            CurrentChoiceTimeLimit = node.timeLimitOverride > 0f
+                ? node.timeLimitOverride
+                : config.choiceTimeLimit;
+            RemainingChoiceTime = CurrentChoiceTimeLimit;
+            ChoiceTimerRunning = false; // взведён, но ждёт BeginChoiceTimer из View
             CurrentState = State.AwaitingChoice;
-            ChoicesPresented?.Invoke(presented, config.choiceTimeLimit);
+            ChoicesPresented?.Invoke(presented, CurrentChoiceTimeLimit);
         }
 
         private void PlayAudioCues(DialogueNode node)
@@ -162,6 +189,7 @@ namespace VisualNovel.Novel
             if (CurrentState == State.Finished) return;
 
             CurrentState = State.Finished;
+            ChoiceTimerRunning = false;
             presented = new List<ChoiceOption>();
             SessionFinished?.Invoke();
         }

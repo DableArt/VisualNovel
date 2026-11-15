@@ -3,27 +3,28 @@
   "nodes": [
     {
       "id": "intro",
-      "speaker": "Рассказчик",
-      "text": "Демо-узел. Сюжета пока нет — просто выбери любой ответ.",
+      "speaker": "Имя персонажа",
+      "text": "Рандомная реплика персонажа, о том какой он крутой и крутой. Как он гнёт палки и мощный - сверх мощный уважаемый чел",
       "sceneAnimationId": "",
-      "musicId": "event:/Music/Theme",
+      "musicId": "",
       "sfxId": "",
-      "voiceId": "voice_intro_01",
+      "voiceId": "",
       "timeoutNextNodeId": "idle_path",
+      "timeLimitOverride": 0,
       "choices": [
-        { "text": "Ответ первый", "nextNodeId": "path_a" },
-        { "text": "Ответ второй", "nextNodeId": "path_b" },
-        { "text": "Ответ третий", "nextNodeId": "path_a" },
-        { "text": "Ответ четвёртый", "nextNodeId": "path_b" }
+        { "text": "Атаковать персонажа", "nextNodeId": "path_a", "bonusText": "+10 к мастерству", "successChance": 0.25 },
+        { "text": "Нет, я не согласен с тобой", "nextNodeId": "path_b", "bonusText": "-5 к доверию" },
+        { "text": "Убежать", "nextNodeId": "path_a", "bonusText": "+5 к интеллекту", "successChance": 0.6 },
+        { "text": "Да, я согласен с тобой", "nextNodeId": "path_b", "bonusText": "+5 к доверию" }
       ]
     },
     {
       "id": "path_a",
       "speaker": "Рассказчик",
       "text": "Выбран вариант А. Сцена завершена.",
-      "sceneAnimationId": "Scene_A",
+      "sceneAnimationId": "",
       "musicId": "",
-      "sfxId": "event:/Sfx/Confirm",
+      "sfxId": "",
       "voiceId": "",
       "timeoutNextNodeId": "",
       "choices": []
@@ -32,9 +33,9 @@
       "id": "path_b",
       "speaker": "Рассказчик",
       "text": "Выбран вариант Б. Сцена завершена.",
-      "sceneAnimationId": "Scene_B",
+      "sceneAnimationId": "",
       "musicId": "",
-      "sfxId": "event:/Sfx/Confirm",
+      "sfxId": "",
       "voiceId": "",
       "timeoutNextNodeId": "",
       "choices": []

@@ -17,8 +17,8 @@ namespace VisualNovel.Novel
         [Range(1, HardMaxChoices)] public int maxChoices = HardMaxChoices;
 
         [Header("Таймер выбора")]
-        [Tooltip("Секунд на выбор ответа. 0 — таймер выключен")]
-        [Min(0f)] public float choiceTimeLimit = 10f;
+        [Tooltip("Секунд на выбор ответа. 0 — таймер выключен. Отсчёт стартует после появления UI (BeginChoiceTimer)")]
+        [Min(0f)] public float choiceTimeLimit = 30f;
 
         [Tooltip("Текст варианта «бездействие», который ядро выбирает по таймауту")]
         public string idleChoiceText = "(Промолчать)";
