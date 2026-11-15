@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 70690170}
   - component: {fileID: 70690169}
   - component: {fileID: 70690168}
+  - component: {fileID: 800000005}
   m_Layer: 5
   m_Name: ButtonAnswerLeft
   m_TagString: Untagged
@@ -853,6 +854,7 @@ GameObject:
   - component: {fileID: 836633005}
   - component: {fileID: 836633004}
   - component: {fileID: 836633003}
+  - component: {fileID: 800000004}
   m_Layer: 5
   m_Name: ButtonAnswerDown
   m_TagString: Untagged
@@ -972,6 +974,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 950327715}
+  - component: {fileID: 800000006}
   m_Layer: 5
   m_Name: TimeLimeter
   m_TagString: Untagged
@@ -1710,6 +1713,8 @@ GameObject:
   - component: {fileID: 1245942715}
   - component: {fileID: 1245942714}
   - component: {fileID: 1245942713}
+  - component: {fileID: 800000007}
+  - component: {fileID: 800000008}
   m_Layer: 5
   m_Name: DialogSystem
   m_TagString: Untagged
@@ -1956,6 +1961,7 @@ GameObject:
   - component: {fileID: 1424307791}
   - component: {fileID: 1424307790}
   - component: {fileID: 1424307789}
+  - component: {fileID: 800000009}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2209,6 +2215,7 @@ GameObject:
   - component: {fileID: 1509318603}
   - component: {fileID: 1509318602}
   - component: {fileID: 1509318601}
+  - component: {fileID: 800000003}
   m_Layer: 5
   m_Name: ButtonAnswerRight
   m_TagString: Untagged
@@ -3027,6 +3034,7 @@ GameObject:
   - component: {fileID: 1920578064}
   - component: {fileID: 1920578063}
   - component: {fileID: 1920578062}
+  - component: {fileID: 800000001}
   m_Layer: 5
   m_Name: DialogPanel
   m_TagString: Untagged
@@ -3224,6 +3232,7 @@ GameObject:
   - component: {fileID: 2048563328}
   - component: {fileID: 2048563327}
   - component: {fileID: 2048563326}
+  - component: {fileID: 800000002}
   m_Layer: 5
   m_Name: ButtonAnswerUP
   m_TagString: Untagged
@@ -3515,3 +3524,122 @@ SceneRoots:
   - {fileID: 1071571538}
   - {fileID: 1245942716}
   - {fileID: 1424307791}
+--- !u!114 &800000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920578060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9c66b3ad3c2d6d1a3d1fa7bc8960a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048563324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972a846916419f828b9d2434e465e150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509318599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972a846916419f828b9d2434e465e150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836633001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972a846916419f828b9d2434e465e150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70690166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972a846916419f828b9d2434e465e150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950327714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1de644815ef6d13b8faa1837f8a88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245942712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fc695a07a0ca6e0822e8f36c031199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &800000008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245942712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222f534ea20ac97a3d1b13c8a37ed397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: c92b91baa48fc0b189121c87eda1049f, type: 2}
+  dialogueJson: {fileID: 4900000, guid: 9500fcf2c0a6e2f601799e5f17d83ed2, type: 3}
+  startNodeId: 
+  dialogueWindow: {fileID: 800000001}
+  choiceWheel: {fileID: 800000007}
+  choiceTimer: {fileID: 800000006}
+  input: {fileID: 800000009}
+  choicePanel: {fileID: 0}
+  actors: []
+  audioService: {fileID: 0}
+  quitOnTimeout: 1
+--- !u!114 &800000009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424307788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74d0fb132e706298fadc1a606cb0fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

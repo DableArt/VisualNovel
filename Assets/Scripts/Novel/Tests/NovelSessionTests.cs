@@ -107,6 +107,7 @@ namespace VisualNovel.Novel.Tests
             bool byTimeout = false;
             session.ChoiceResolved += (option, timeout) => { resolved = option; byTimeout = timeout; };
             session.Start();
+            session.BeginChoiceTimer();
 
             session.Tick(config.choiceTimeLimit + 0.1f);
 
@@ -124,6 +125,7 @@ namespace VisualNovel.Novel.Tests
                 Node("idle_end", "", ""));
 
             session.Start();
+            session.BeginChoiceTimer();
             session.Tick(config.choiceTimeLimit + 0.1f);
 
             Assert.AreEqual("node_idle", session.CurrentNode.id);
@@ -135,6 +137,7 @@ namespace VisualNovel.Novel.Tests
             config.choiceTimeLimit = 0f;
             var session = CreateSession(Node("start", "", "a"));
             session.Start();
+            session.BeginChoiceTimer();
 
             session.Tick(1000f);
 
@@ -163,6 +166,7 @@ namespace VisualNovel.Novel.Tests
             bool finished = false;
             session.SessionFinished += () => finished = true;
             session.Start();
+            session.BeginChoiceTimer();
             session.Tick(config.choiceTimeLimit + 0.1f);
 
             Assert.IsTrue(finished);
@@ -201,6 +205,79 @@ namespace VisualNovel.Novel.Tests
         }
 
         [Test]
+        public void Timer_Waits_For_BeginChoiceTimer()
+        {
+            var session = CreateSession(
+                Node("start", "", "a"),
+                Node("idle_end", ""));
+            session.Start();
+
+            // UI ещё появляется — таймер взведён, но не идёт.
+            Assert.IsFalse(session.ChoiceTimerRunning);
+            session.Tick(config.choiceTimeLimit + 0.1f);
+            Assert.AreEqual(NovelSession.State.AwaitingChoice, session.CurrentState);
+            Assert.AreEqual(config.choiceTimeLimit, session.RemainingChoiceTime);
+
+            // UI появился — отсчёт пошёл.
+            session.BeginChoiceTimer();
+            Assert.IsTrue(session.ChoiceTimerRunning);
+            session.Tick(config.choiceTimeLimit + 0.1f);
+            Assert.AreEqual("idle_end", session.CurrentNode.id);
+        }
+
+        [Test]
+        public void BeginChoiceTimer_Is_Safe_When_Repeated_Or_Disabled()
+        {
+            config.choiceTimeLimit = 0f;
+            var session = CreateSession(Node("start", "", "a"));
+            session.Start();
+
+            session.BeginChoiceTimer(); // таймер выключен — без эффекта
+            Assert.IsFalse(session.ChoiceTimerRunning);
+            Assert.AreEqual(NovelSession.State.AwaitingChoice, session.CurrentState);
+        }
+
+        [Test]
+        public void Node_Time_Limit_Override_Beats_Config()
+        {
+            string json = "{\"startNodeId\":\"start\",\"nodes\":[{" +
+                          "\"id\":\"start\",\"text\":\"Т\",\"timeLimitOverride\":45," +
+                          "\"choices\":[{\"text\":\"Дальше\",\"nextNodeId\":\"\"}]}]}";
+            var session = new NovelSession(config, new JsonDialogueProvider(json), audio);
+
+            float presentedLimit = -1f;
+            session.ChoicesPresented += (_, limit) => presentedLimit = limit;
+            session.Start();
+
+            Assert.AreEqual(45f, presentedLimit);
+            Assert.AreEqual(45f, session.CurrentChoiceTimeLimit);
+            Assert.AreEqual(45f, session.RemainingChoiceTime);
+
+            session.BeginChoiceTimer();
+            session.Tick(config.choiceTimeLimit + 0.1f); // больше конфига, но меньше override
+            Assert.AreEqual(NovelSession.State.AwaitingChoice, session.CurrentState);
+        }
+
+        [Test]
+        public void Choice_Bonus_And_Chance_Load_From_Json()
+        {
+            string json = "{\"startNodeId\":\"start\",\"nodes\":[{" +
+                          "\"id\":\"start\",\"text\":\"Т\",\"choices\":[" +
+                          "{\"text\":\"Атака\",\"nextNodeId\":\"\",\"bonusText\":\"+10 к мастерству\",\"successChance\":0.25}," +
+                          "{\"text\":\"Уйти\",\"nextNodeId\":\"\"}]}]}";
+            var session = new NovelSession(config, new JsonDialogueProvider(json), audio);
+            session.Start();
+
+            var first = session.PresentedChoices[0];
+            Assert.AreEqual("+10 к мастерству", first.bonusText);
+            Assert.AreEqual(0.25f, first.successChance, 0.0001f);
+
+            var second = session.PresentedChoices[1];
+            Assert.AreEqual(string.Empty, second.bonusText);
+            Assert.Less(second.successChance, 0f); // не задан — не показывается
+        }
+
+        [Test]
         public void Second_Tick_After_Timeout_Does_Not_Resolve_Twice()
         {
             var session = CreateSession(
@@ -210,6 +287,7 @@ namespace VisualNovel.Novel.Tests
             int resolvedCount = 0;
             session.ChoiceResolved += (_, _) => resolvedCount++;
             session.Start();
+            session.BeginChoiceTimer();
             session.Tick(config.choiceTimeLimit + 0.1f);
             session.Tick(config.choiceTimeLimit + 0.1f);
 

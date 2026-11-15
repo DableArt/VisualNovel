@@ -15,6 +15,12 @@ namespace VisualNovel.Novel
         /// <summary>Id узла, в который ведёт выбор. Пусто — сцена завершается.</summary>
         public string nextNodeId = string.Empty;
 
+        /// <summary>Описание бонуса/последствия ("+10 к мастерству"). Показывается при наведении. Пусто — без описания.</summary>
+        public string bonusText = string.Empty;
+
+        /// <summary>Шанс срабатывания варианта (0..1). Отрицательное значение — шанс не показывается.</summary>
+        public float successChance = -1f;
+
         public ChoiceOption() { }
 
         public ChoiceOption(string text, string nextNodeId)

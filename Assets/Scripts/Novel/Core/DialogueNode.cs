@@ -41,6 +41,12 @@ namespace VisualNovel.Novel
         /// </summary>
         public string timeoutNextNodeId = string.Empty;
 
+        /// <summary>
+        /// Лимит времени на выбор для этого узла (сек).
+        /// 0 — берётся <see cref="NovelCoreConfig.choiceTimeLimit"/>.
+        /// </summary>
+        public float timeLimitOverride = 0f;
+
         /// <summary>Варианты ответа. Пусто — узел завершает сцену.</summary>
         public List<ChoiceOption> choices = new();
     }

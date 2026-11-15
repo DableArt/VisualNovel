@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf55893d48d24ae16f6f698785ccfe0a, type: 3}
   m_Name: NovelCoreConfig
   m_EditorClassIdentifier: 
-  maxChoices: 6
-  choiceTimeLimit: 10
+  maxChoices: 4
+  choiceTimeLimit: 30
   idleChoiceText: "(\u041F\u0440\u043E\u043C\u043E\u043B\u0447\u0430\u0442\u044C)"
   idleNextNodeId: 
