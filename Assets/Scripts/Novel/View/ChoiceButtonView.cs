@@ -9,8 +9,8 @@ namespace VisualNovel.Novel
 {
     /// <summary>
     /// Кнопка варианта ответа. Состояния по ТЗ:
-    /// обычная — полупрозрачный фон; hover — белый фон;
-    /// нажатие (Active) — инверсия цветов фона и контента.
+    /// обычная — БЕЗ фона, белый текст; hover — белый фон, тёмный текст;
+    /// нажатие (Active) — чёрный фон, белый текст.
     /// Показом бонусов управляет ChoiceWheelView через события Hovered/Unhovered.
     /// </summary>
     [RequireComponent(typeof(Button))]
@@ -23,17 +23,23 @@ namespace VisualNovel.Novel
         [SerializeField] private Graphic icon;         // дочерний "Ico" (может отсутствовать)
 
         [Header("Цвета")]
-        [SerializeField] private Color normalBackground = new(1f, 1f, 1f, 0.25f);
+        [Tooltip("Обычное состояние: фона нет совсем")]
+        [SerializeField] private Color normalBackground = new(1f, 1f, 1f, 0f);
+        [Tooltip("Hover: белый фон, тёмный текст")]
         [SerializeField] private Color hoverBackground = Color.white;
-        [SerializeField] private Color normalContent = new(0.18f, 0.26f, 0.40f, 1f);
+        [SerializeField] private Color normalContent = Color.white;
+        [SerializeField] private Color hoverContent = new(0.18f, 0.26f, 0.40f, 1f);
+        [Tooltip("Нажатие (Active): чёрный фон, белый текст")]
+        [SerializeField] private Color pressedBackground = Color.black;
+        [SerializeField] private Color pressedContent = Color.white;
 
         [Header("Подсветка при выборе с клавиатуры/геймпада")]
         [Min(0.01f)] [SerializeField] private float pressFlashDuration = 0.15f;
 
-        /// <summary>Курсор вошёл в кнопку (колесо показывает бонусы).</summary>
+        /// <summary>Кнопка в hover (мышь или выбор с клавиатуры/геймпада).</summary>
         public event Action Hovered;
 
-        /// <summary>Курсор покинул кнопку (колесо прячет бонусы).</summary>
+        /// <summary>Кнопка покинула hover.</summary>
         public event Action Unhovered;
 
         private Button button;
@@ -68,7 +74,26 @@ namespace VisualNovel.Novel
             if (!interactable) ResetVisual();
         }
 
-        /// <summary>Выбор с клавиатуры/геймпада: короткая подсветка нажатия + клик.</summary>
+        /// <summary>Программный hover (выбор с клавиатуры/геймпада до подтверждения).</summary>
+        public void ShowHovered()
+        {
+            EnsureInitialized();
+            if (hovered) return;
+            hovered = true;
+            RefreshColors();
+            Hovered?.Invoke();
+        }
+
+        /// <summary>Снять программный hover (курсор направления ушёл на другую кнопку).</summary>
+        public void ClearHover()
+        {
+            if (!hovered) return;
+            hovered = false;
+            RefreshColors();
+            Unhovered?.Invoke();
+        }
+
+        /// <summary>Подтверждение с клавиатуры/геймпада: вспышка нажатия + клик.</summary>
         public void SimulatePress()
         {
             EnsureInitialized();
@@ -77,7 +102,7 @@ namespace VisualNovel.Novel
             button.onClick.Invoke();
         }
 
-        /// <summary>Исходное состояние: полупрозрачный фон, тёмный контент.</summary>
+        /// <summary>Исходное состояние: без фона, белый контент.</summary>
         public void ResetVisual()
         {
             hovered = false;
@@ -118,9 +143,9 @@ namespace VisualNovel.Novel
 
         private void RefreshColors()
         {
-            if (pressed) ApplyColors(normalContent, hoverBackground); // Active: инверсия
-            else if (hovered) ApplyColors(hoverBackground, normalContent); // hover: белый фон
-            else ApplyColors(normalBackground, normalContent);
+            if (pressed) ApplyColors(pressedBackground, pressedContent); // Active: чёрный фон
+            else if (hovered) ApplyColors(hoverBackground, hoverContent); // hover: белый фон
+            else ApplyColors(normalBackground, normalContent); // обычная: без фона
         }
 
         private void ApplyColors(Color backgroundColor, Color contentColor)

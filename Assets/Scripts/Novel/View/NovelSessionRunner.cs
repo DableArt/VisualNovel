@@ -81,6 +81,7 @@ namespace VisualNovel.Novel
             }
 
             if (dialogueWindow != null) dialogueWindow.HideInstant();
+            if (choiceWheel != null) choiceWheel.Hide();
             if (choiceTimer != null) choiceTimer.Hide();
         }
 

@@ -29,7 +29,7 @@ namespace VisualNovel.Novel
         [SerializeField] private RectTransform[] bonusRoots = new RectTransform[DirectionCount];
 
         [Header("Анимация появления (FadeInUp)")]
-        [Min(0f)] [SerializeField] private float fadeDuration = 0.35f;
+        [Min(0f)] [SerializeField] private float fadeDuration = 0.5f;
         [Min(0f)] [SerializeField] private float fadeOffset = 80f;
 
         private readonly TMP_Text[] bonusLabels = new TMP_Text[DirectionCount];
@@ -38,6 +38,7 @@ namespace VisualNovel.Novel
 
         private NovelSession session;
         private IReadOnlyList<ChoiceOption> options;
+        private ChoiceDirection? hoveredDirection;
 
         /// <summary>Кнопки доступны игроку (колесо полностью появилось).</summary>
         public bool InputEnabled { get; private set; }
@@ -53,8 +54,8 @@ namespace VisualNovel.Novel
                 if (button == null) continue;
 
                 homePositions[i] = ((RectTransform)button.transform).anchoredPosition;
-                button.Hovered += () => ShowBonus(direction);
-                button.Unhovered += () => HideBonus(direction);
+                button.Hovered += () => OnButtonHovered(direction);
+                button.Unhovered += () => OnButtonUnhovered(direction);
                 button.Button.onClick.AddListener(() => Select((ChoiceDirection)direction));
                 button.SetInteractable(false);
                 button.gameObject.SetActive(false);
@@ -108,7 +109,11 @@ namespace VisualNovel.Novel
             InputEnabled = true;
         }
 
-        /// <summary>Выбор направления с клавиатуры/геймпада (из DialogueInputController).</summary>
+        /// <summary>
+        /// Нажатие направления с клавиатуры/геймпада (из DialogueInputController).
+        /// Первое нажатие — hover (выбор/подсветка варианта + бонусы),
+        /// повторное нажатие в ту же сторону — активация.
+        /// </summary>
         public void SelectFromInput(ChoiceDirection direction)
         {
             if (!InputEnabled) return;
@@ -119,7 +124,26 @@ namespace VisualNovel.Novel
             var button = buttons[index];
             if (button == null || !button.gameObject.activeSelf) return;
 
-            button.SimulatePress();
+            if (hoveredDirection == direction)
+            {
+                button.SimulatePress(); // повторное нажатие — активация
+                return;
+            }
+
+            MoveHover(direction);
+        }
+
+        /// <summary>Переносит курсор-выбор на кнопку направления.</summary>
+        private void MoveHover(ChoiceDirection direction)
+        {
+            if (hoveredDirection.HasValue && hoveredDirection.Value != direction)
+            {
+                var previous = buttons[(int)hoveredDirection.Value];
+                if (previous != null) previous.ClearHover();
+            }
+
+            hoveredDirection = direction;
+            buttons[(int)direction].ShowHovered();
         }
 
         /// <summary>Прячет колесо и подписи бонусов.</summary>
@@ -127,6 +151,7 @@ namespace VisualNovel.Novel
         {
             InputEnabled = false;
             options = null;
+            hoveredDirection = null;
 
             foreach (var button in buttons)
                 if (button != null)
@@ -155,6 +180,27 @@ namespace VisualNovel.Novel
 
             InputEnabled = false;
             session.SelectChoice(index);
+        }
+
+        private void OnButtonHovered(int direction)
+        {
+            ShowBonus(direction);
+
+            // Курсор мыши над кнопкой — синхронизируем курсор клавиатуры/геймпада.
+            var current = (ChoiceDirection)direction;
+            if (hoveredDirection.HasValue && hoveredDirection.Value != current)
+            {
+                var previous = buttons[(int)hoveredDirection.Value];
+                if (previous != null) previous.ClearHover();
+            }
+            hoveredDirection = current;
+        }
+
+        private void OnButtonUnhovered(int direction)
+        {
+            HideBonus(direction);
+            if (hoveredDirection == (ChoiceDirection)direction)
+                hoveredDirection = null;
         }
 
         private void ShowBonus(int direction)

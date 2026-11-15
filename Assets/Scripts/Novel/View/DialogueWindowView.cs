@@ -17,7 +17,7 @@ namespace VisualNovel.Novel
         [SerializeField] private TMP_Text textLabel;
 
         [Header("Анимация появления (FadeInDown)")]
-        [Min(0f)] [SerializeField] private float fadeDuration = 0.4f;
+        [Min(0f)] [SerializeField] private float fadeDuration = 0.6f;
         [Min(0f)] [SerializeField] private float fadeOffset = 80f;
 
         private RectTransform rect;
