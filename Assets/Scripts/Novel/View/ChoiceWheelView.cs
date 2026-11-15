@@ -79,8 +79,10 @@ namespace VisualNovel.Novel
                 if (button == null) continue;
 
                 bool used = i < presented.Count;
+                // Текст ставим ДО SetActive: иначе TMP перестраивает старый текст
+                // на скрытом объекте и падает на fallback-материалах (known bug TMP).
+                button.SetText(used ? presented[i].text : string.Empty);
                 button.gameObject.SetActive(used);
-                if (used) button.SetText(presented[i].text);
                 button.SetInteractable(false);
                 HideBonus(i);
             }
@@ -213,15 +215,16 @@ namespace VisualNovel.Novel
             var option = options[direction];
             bool hasChance = option.successChance >= 0f;
 
+            // Все тексты — до активации контейнеров (защита от краша TMP на fallback-материалах).
             var bonusLabel = bonusLabels[direction];
             if (bonusLabel != null) bonusLabel.text = option.bonusText ?? string.Empty;
 
             var percentLabel = percentLabels[direction];
             if (percentLabel != null)
             {
-                percentLabel.gameObject.SetActive(hasChance);
                 if (hasChance)
                     percentLabel.text = Mathf.RoundToInt(option.successChance * 100f) + "%";
+                percentLabel.gameObject.SetActive(hasChance);
             }
 
             root.gameObject.SetActive(!string.IsNullOrEmpty(option.bonusText) || hasChance);
