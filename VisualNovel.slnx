@@ -6,9 +6,9 @@
   <Project Path="FungusExamples.csproj" />
   <Project Path="VisualNovel.Novel.csproj" />
   <Project Path="InkEditor.csproj" />
+  <Project Path="VisualNovel.MainMenu.csproj" />
   <Project Path="VisualNovel.MainMenu.Tests.csproj" />
   <Project Path="Fungus.FungusLuaEditor.csproj" />
-  <Project Path="VisualNovel.MainMenu.csproj" />
   <Project Path="VisualNovel.Novel.Tests.csproj" />
   <Project Path="Fungus.FungusLuaJSONCheckerEditor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
